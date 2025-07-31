@@ -6,7 +6,7 @@ from unittest.mock import patch
 @pytest.mark.asyncio
 async def test_upload_and_result():
     with patch("app.worker.process_invoice.delay") as mock_task:
-        mock_task.return_value.id = "fake-task-id"
+        mock_task.return_value = {"task_id": "dummy123"}
         async with AsyncClient(app=app, base_url="http://test") as ac:
             with open("tests/sample_invoice.png", "rb") as f:
                 files = {"file": ("sample_invoice.png", f, "image/png")}
