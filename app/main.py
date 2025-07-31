@@ -1,5 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, BackgroundTasks, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -21,14 +20,17 @@ templates = Jinja2Templates(directory="app/templates")
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
+
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+
 @app.post("/upload")
 async def upload_invoice(file: UploadFile = File(...)):
     if not file.filename.endswith((".png", ".jpg", ".jpeg", ".pdf")):
-        raise HTTPException(status_code=400, detail="Only image or PDF files are allowed.")
+        raise HTTPException(status_code=400,
+                            detail="Only image or PDF files are allowed.")
     task_id = str(uuid.uuid4())
     filename = f"uploaded_{task_id}_{file.filename}"
     file_path = os.path.join("uploads", filename)
