@@ -1,23 +1,24 @@
-fastapi
-uvicorn[standard]
-pydantic
-python-multipart
+# Core dependencies
 aiofiles
-httpx
-celery
-redis
-pytesseract
-Pillow
-python-dotenv
-sqlalchemy>=2.0
 alembic
+celery
+fastapi
+httpx
 jinja2
+pdf2image
+Pillow
+pydantic
+python-dotenv
+python-multipart
+pytesseract
+redis
+sqlalchemy>=2.0
+uvicorn[standard]
 
 # Testing & Linting
+flake8>=6.0.0
 pytest
 pytest-asyncio
-httpx
-flake8
 
 # Optional: for dev and debugging
 black
