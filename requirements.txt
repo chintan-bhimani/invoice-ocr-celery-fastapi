@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+pytesseract
+celery
+redis
+sqlalchemy
+pillow
+python-multipart
+pdf2image
+jinja2
+flake8>=6.0.0
+

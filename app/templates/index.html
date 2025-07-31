@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Invoice OCR Upload</title>
+</head>
+<body>
+  <h2>Upload Invoice (PDF or Image)</h2>
+  <form id="uploadForm">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+  </form>
+
+  <div id="status" style="margin-top: 20px;"></div>
+  <div id="result" style="margin-top: 10px; white-space: pre-wrap;"></div>
+
+  <script>
+    const form = document.getElementById("uploadForm");
+    const statusDiv = document.getElementById("status");
+    const resultDiv = document.getElementById("result");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      statusDiv.textContent = "Uploading file...";
+
+      try {
+        const uploadRes = await fetch("/upload", {
+          method: "POST",
+          body: formData
+        });
+
+        const { task_id } = await uploadRes.json();
+        statusDiv.textContent = "Processing...";
+
+        // Poll every 2 seconds for result
+        const pollInterval = setInterval(async () => {
+          const resultRes = await fetch(`/result/${task_id}`);
+          if (resultRes.ok) {
+            const data = await resultRes.json();
+            clearInterval(pollInterval);
+            statusDiv.textContent = "OCR Completed!";
+            resultDiv.textContent = data.text;
+          }
+        }, 2000);
+      } catch (err) {
+        statusDiv.textContent = "Upload failed!";
+        resultDiv.textContent = err.message;
+      }
+    });
+  </script>
+</body>
+</html>
