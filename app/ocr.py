@@ -1,6 +1,5 @@
 import pytesseract
 from PIL import Image
-import os
 from pdf2image import convert_from_path
 
 
