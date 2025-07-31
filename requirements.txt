@@ -1,13 +1,24 @@
 fastapi
-uvicorn
-pytesseract
+uvicorn[standard]
+pydantic
+python-multipart
+aiofiles
+httpx
 celery
 redis
-sqlalchemy
-pillow
-python-multipart
-pdf2image
+pytesseract
+Pillow
+python-dotenv
+sqlalchemy>=2.0
+alembic
 jinja2
-flake8>=6.0.0
+
+# Testing & Linting
 pytest
+pytest-asyncio
 httpx
+flake8
+
+# Optional: for dev and debugging
+black
+isort
