@@ -9,4 +9,5 @@ python-multipart
 pdf2image
 jinja2
 flake8>=6.0.0
-
+pytest
+httpx
