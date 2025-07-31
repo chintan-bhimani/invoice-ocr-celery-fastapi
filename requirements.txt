@@ -1,13 +1,25 @@
-fastapi
-uvicorn
-pytesseract
+# Core dependencies
+aiofiles
+alembic
 celery
-redis
-sqlalchemy
-pillow
-python-multipart
-pdf2image
+fastapi
+httpx
 jinja2
+pdf2image
+Pillow
+pydantic
+python-dotenv
+python-multipart
+pytesseract
+redis
+sqlalchemy>=2.0
+uvicorn[standard]
+
+# Testing & Linting
 flake8>=6.0.0
 pytest
-httpx
+pytest-asyncio
+
+# Optional: for dev and debugging
+black
+isort
