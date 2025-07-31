@@ -34,9 +34,8 @@ jobs:
         run: |
           flake8 app --max-line-length=88
 
-      - name: Run Pytest
-        run: |
-          pytest tests
+      - name: Run tests
+      run: PYTHONPATH=. pytest tests
 
   docker-build:
     runs-on: ubuntu-latest
